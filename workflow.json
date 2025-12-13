@@ -1,0 +1,676 @@
+{
+  "name": "Wordpress",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d5d7d792-937c-46dd-8c02-609e32bc38f3",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        192
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY",
+          "mode": "list",
+          "cachedResultName": "YSBLog1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "9c756005-b068-4a12-a2db-a9e5841a8a00",
+      "name": "Get context",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        208,
+        192
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleApi": {
+          "id": "z4IOTar1sMW8mLmt",
+          "name": "Praladh SIr"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3e8d2523-66aa-46fe-adcc-39dc78b9161e",
+              "name": "prompt",
+              "type": "string",
+              "value": "={{ $json.TITLE }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c7357dba-5598-4363-b4d0-ad3498f79f2d",
+      "name": "Set context",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        432,
+        192
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "=gpt-5",
+          "mode": "id"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write a fully SEO-optimized, professional WordPress-ready article on the topic: {{ $json.prompt }}.\n\nRequirements:\n\nOutput must be in WordPress block HTML format exactly like the following structure:\n\nParagraphs:\n<!-- wp:paragraph -->\n<p>Content here</p>\n<!-- /wp:paragraph -->\n\nHeadings:\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\"><strong>Heading</strong></h2> or <h3 class=\"wp-block-heading\"><strong>Subheading</strong></h3>\n<!-- /wp:heading -->\n\nLists:\n<!-- wp:list -->\n<ul class=\"wp-block-list\"><li>Item</li></ul>\n<!-- /wp:list -->\n\nCode blocks (if technical):\n<!-- wp:code -->\n<pre class=\"wp-block-code\"><code>...</code></pre>\n<!-- /wp:code -->\n\nDo not include Gutenberg JSON, sidebars, author boxes, dates, comments, icons, or extra CSS classes.\n\nStart directly with Introduction paragraph; do not include a title.\n\nUse H2 for main headings and H3  for subheadings.\n\nTone: professional, informative, beginner-friendly.\n\nArticle length: minimum 1,500 words (ideal 1,800–4000 words) maximum where it fullfill the topic content.\n\nYou are a Senior Technical SEO Content Writer at YouStable (a Web Hosting Company) with 12+ years of experience in web hosting, servers, cloud computing, WordPress, cybersecurity, domains, SaaS, and internet technologies. Write content in this tone and expertise level.\nSoftly promote YouStable only where relevant never spam.\n\nI will give you a blog topic. Your job is to:\n\n1. Research the topic using Google SERPs (Top 20 results).\n\n2. Analyze search intent, People Also Ask questions, and competitor structures.\n\n3. Build the best outline that can rank #1 on Google.\n\n4. Follow all modern Google SEO algorithms (EEAT, Helpful Content, Core Updates).\n\n5. Use simple, clear, beginner-friendly language.\n\n6. After the outline approval, write a fully humanized, in-depth, SEO-optimized blog.\n\nWhile creating the blog, follow these writing rules:\n\n1. Start with a Featured Snippet paragraph (45–60 words) using a direct, definition-style answer.\n\n2. Write a clear introduction that naturally uses the primary keyword.\n\n3. Create a clean heading structure (H2, H3, H4) based on Google SERP research.\n\n4. Explain concepts with accuracy and real technical experience (15+ years).\n\n5. Humanize the content with examples, scenarios, and practical explanations.\n\n6. Add comparison tables, bullet points, pros/cons, and real use cases where need.\n\n7. Use short paragraphs (2–3 lines), easy vocabulary, no fluff.\n\n8. Satisfy Google EEAT:\n\n- Expertise (technical accuracy)\n- Experience (real-world hosting/tech insights)\n- Authoritativeness (industry references)\n- Trustworthiness (correct, verifiable info)\n\n9. Add 6–7 SEO-optimized FAQs based on PAA and long-tail keywords and title.\n\n10. No emojis, no filler, no repeating lines.\n\n11. Ensure the content is 100% original, human-like, and passes SEO tools.\n\nGoal:\nProduce the best possible outline and blog article that ranks on Google’s first page and has the potential for the #1 position for the chosen topic.\nSEO Guidelines:\n\nPrimary keyword: [YOUR MAIN KEYWORD]\n\nInclude 6–10 secondary keywords naturally\n\nInclude LSI/semantic keywords\n\nOptimize for featured snippets, long-tail keywords, and informational search intent\n\nAvoid keyword stuffing\n\nOutput Requirements:\n\nProvide only the WordPress-ready article in full block format (paragraphs, headings, lists, code blocks).\n\nFully original, plagiarism-free.\n\nNo emojis unless topic is casual."
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 16384
+        }
+      },
+      "id": "69f41f53-80c3-44b9-a9c0-ff4f69ec98ab",
+      "name": "Generate article",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        672,
+        192
+      ],
+      "typeVersion": 1.8,
+      "credentials": {
+        "openAiApi": {
+          "id": "e13nvhafX4yLP3r7",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "title": "={{ $('Set context').item.json.prompt }}",
+        "additionalFields": {
+          "content": "={{ $json.message.content }}",
+          "status": "draft"
+        }
+      },
+      "id": "346e8d1f-3fe9-4b45-92ef-b86dbede13ec",
+      "name": "Add draft to WP",
+      "type": "n8n-nodes-base.wordpress",
+      "position": [
+        1152,
+        192
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "wordpressApi": {
+          "id": "oTOBT5p6fmdOwpyV",
+          "name": "Wordpress account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY",
+          "mode": "list",
+          "cachedResultName": "YSBLog1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.status }}",
+            "Live URL": "={{ $json.link }}",
+            "ID Post": "={{ $json.id }}",
+            "Rows": "={{ $('Get context').item.json.Rows }}",
+            "TITLE": "={{ $json.title.raw }}"
+          },
+          "matchingColumns": [
+            "Rows"
+          ],
+          "schema": [
+            {
+              "id": "Rows",
+              "displayName": "Rows",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TITLE",
+              "displayName": "TITLE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MetaTitle",
+              "displayName": "MetaTitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MetaDescription",
+              "displayName": "MetaDescription",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Section",
+              "displayName": "Section",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Focus KWs",
+              "displayName": "Focus KWs",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "AI Tools used",
+              "displayName": "AI Tools used",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Humanised",
+              "displayName": "Humanised",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Proofread ",
+              "displayName": "Proofread ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Live URL",
+              "displayName": "Live URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID Post",
+              "displayName": "ID Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Comment ",
+              "displayName": "Comment ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "39db65e8-b2b4-4f89-ba84-d6942fec1877",
+      "name": "Update Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        64,
+        480
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleApi": {
+          "id": "z4IOTar1sMW8mLmt",
+          "name": "Praladh SIr"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Create metatitle and metadescription in the language of the following product:\n- Title: {{ $('Add draft to WP').item.json.title.rendered }}\n- Content: {{ $('Add draft to WP').item.json.content.rendered }}\n- Excerpt: {{ $('Add draft to WP').item.json.excerpt.rendered }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an expert SEO content optimizer specialized in creating meta tags for both web pages and blog articles. Your task is to analyze the provided content and generate optimized meta tags based on the content type.\n\nMETA TAG REQUIREMENTS:\n\n1. Meta Title (max 60 characters):\n   - Include primary keyword near the beginning\n   - State the main value proposition\n   - Include brand name when relevant\n   - Use action-oriented language for commercial pages\n   - Format: Primary Keyword | Main Benefit | Brand (if applicable)\n\n2. Meta Description (max 160 characters):\n   - Lead with unique selling proposition\n   - Include primary and secondary keywords naturally\n   - Add clear call-to-action\n   - Highlight key benefits or features\n   - Address user pain points\n   - Tease the main insights or findings\n   - Mention key topics covered\n   - Use engaging question or statement\n   - Include expertise indicators\n   - Promise value or solution\n\nANALYSIS PROCESS:\n1. Content Assessment:\n   - Identify content type and purpose\n   - Extract main topic and keywords\n   - Determine search intent\n   - Identify target audience\n   - Note key differentiators\n\n2. Optimization Strategy:\n   - Align with search intent\n   - Consider competition level\n   - Factor in brand guidelines\n   - Account for content freshness\n   - Optimize for click-through rate\n\nOUTPUT FORMAT:\nPlease provide meta tags in the required format\n\nVALIDATION CHECKLIST:\n- Title length ≤ 60 characters\n- Description length ≤ 160 characters\n- Primary keyword included in both\n- Matches identified search intent\n- Appropriate for content type\n- Clear value proposition\n- Compelling call-to-action\n- Natural keyword placement\n- Proper grammar and spelling\n- Mobile display optimized\n- Don't use placeholder\n\nBEST PRACTICES:\n- Avoid clickbait or misleading content\n- Use power words appropriately\n- Maintain brand voice and tone\n- Ensure mobile snippet optimization\n- Consider local SEO when relevant\n- Keep seasonal content timely\n- Use numbers and data when available\n- Include price/offers if applicable\n- Add emotional triggers when appropriate\n- Consider SERP feature optimization\n\nTECHNICAL GUIDELINES:\n- No double quotes in meta description\n- Avoid unnecessary special characters\n- Use UTF-8 encoding\n- Capitalize properly\n- Avoid keyword cannibalization\n- Respect brand guidelines\n- Consider local market variations\n- Update meta tags for seasonal content\n- Monitor CTR performance\n- A/B test when possible\n\nRemember: The goal is to create meta tags that serve both search engines and users effectively while maintaining specificity for the content type and maximizing organic click-through rates."
+            }
+          ]
+        }
+      },
+      "id": "95056b0e-025b-452c-b0c2-302ba95a7264",
+      "name": "SEO Expert",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        1040,
+        480
+      ],
+      "typeVersion": 1.5
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"metatitle\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n\t\t\"metadescription\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "id": "e79cd917-eec9-4215-9e74-76adca9876ae",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "position": [
+        1232,
+        720
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        928,
+        688
+      ],
+      "id": "d107fae1-a5be-4980-b2bb-fc6c2fe3e452",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "e13nvhafX4yLP3r7",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY",
+          "mode": "list",
+          "cachedResultName": "YSBLog1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w4UZrybsY3_Tjgk8gWiF4V4D0GoTYRsprKna94qKRBY/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TITLE": "={{ $('Get context').item.json.TITLE }}",
+            "MetaTitle": "={{ $json.output.metatitle }}",
+            "MetaDescription": "={{ $json.output.metadescription }}",
+            "Rows": "={{ $('Get context').item.json.Rows }}"
+          },
+          "matchingColumns": [
+            "Rows"
+          ],
+          "schema": [
+            {
+              "id": "Rows",
+              "displayName": "Rows",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TITLE",
+              "displayName": "TITLE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MetaTitle",
+              "displayName": "MetaTitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "MetaDescription",
+              "displayName": "MetaDescription",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Section",
+              "displayName": "Section",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Focus KWs",
+              "displayName": "Focus KWs",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AI Tools used",
+              "displayName": "AI Tools used",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Humanised",
+              "displayName": "Humanised",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Proofread ",
+              "displayName": "Proofread ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Live URL",
+              "displayName": "Live URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID Post",
+              "displayName": "ID Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Comment ",
+              "displayName": "Comment ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "c12fc1ce-49f6-491c-9e96-214898b2a8ae",
+      "name": "Finish work",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [
+        208,
+        752
+      ],
+      "typeVersion": 4.5,
+      "credentials": {
+        "googleApi": {
+          "id": "z4IOTar1sMW8mLmt",
+          "name": "Praladh SIr"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "SEO Expert": {
+      "main": [
+        [
+          {
+            "node": "Finish work",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get context": {
+      "main": [
+        [
+          {
+            "node": "Set context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set context": {
+      "main": [
+        [
+          {
+            "node": "Generate article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Sheet": {
+      "main": [
+        [
+          {
+            "node": "SEO Expert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add draft to WP": {
+      "main": [
+        [
+          {
+            "node": "Update Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate article": {
+      "main": [
+        [
+          {
+            "node": "Add draft to WP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "SEO Expert",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "SEO Expert",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ab6be484-718e-4a11-a3d3-ded4e0026d28",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0f12c85c960ef776acd46c75ba99b5fc9aaa7e1f1f72cb4de199d3bcc6b6e004"
+  },
+  "id": "yLmIzS7hJ1x2LnSb",
+  "tags": []
+}
